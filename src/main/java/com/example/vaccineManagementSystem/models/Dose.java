@@ -1,13 +1,14 @@
 package com.example.vaccineManagementSystem.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.util.Date;
 
 @Entity
-@Table(name = "dose1")
-public class Dose1 {
+@Table(name = "dose")
+public class Dose {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,6 +19,19 @@ public class Dose1 {
 
     @CreationTimestamp  //Hibernate will automatically put the timestamp when data is entered in DB
     private Date vaccinationDate;
+
+    @JsonIgnore
+    @OneToOne
+    @JoinColumn
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public int getId() {
         return id;
@@ -42,4 +56,5 @@ public class Dose1 {
     public void setVaccinationDate(Date vaccinationDate) {
         this.vaccinationDate = vaccinationDate;
     }
+
 }

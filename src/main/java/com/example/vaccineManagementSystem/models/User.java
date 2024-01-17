@@ -1,6 +1,7 @@
 package com.example.vaccineManagementSystem.models;
 
 import com.example.vaccineManagementSystem.enums.Gender;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -23,6 +24,18 @@ public class User {
     //so storing gender as a string
     private Gender gender;
     private String mobileNo;
+
+//    @JsonIgnore
+    @OneToOne(mappedBy = "user",cascade = CascadeType.ALL)
+    Dose dose;
+
+    public Dose getDose() {
+        return dose;
+    }
+
+    public void setDose(Dose dose) {
+        this.dose = dose;
+    }
 
     public int getUserId() {
         return userId;
