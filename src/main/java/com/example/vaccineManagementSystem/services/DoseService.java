@@ -17,13 +17,14 @@ public class DoseService {
     UserRepository userRepository;
 
     public String giveDose(String doseId, Integer userId) {
+
         if (userRepository.findById(userId).isPresent()) {
             User user = userRepository.findById(userId).get();
             Dose dose = new Dose();
             dose.setDoseId(doseId);
             dose.setUser(user);
 
-            //Setting the child object to in that corresponding attribute
+            //Setting the child object for parent as an attribute
             user.setDose(dose);
 
             userRepository.save(user);
